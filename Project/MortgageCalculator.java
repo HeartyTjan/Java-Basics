@@ -23,11 +23,11 @@ public class MortgageCalculator{
 		int durationInYears = receiver.nextInt();
 		int durationInMonth = durationInYears * 12;
 
-		double monthlyMortgage1 = principalAmount * monthlyInterestRate * Math.pow((1 + monthlyInterestRate), durationInMonth);
-		double monthlyMortgage2 = Math.pow((1 + monthlyInterestRate), durationInMonth)- 1;
-		double actualMonthlyMortgage = monthlyMortgage1 / monthlyMortgage2;
+		double MortgageCalculation1 = principalAmount * monthlyInterestRate * Math.pow((1 + monthlyInterestRate), durationInMonth);
+		double MortgageCalculation2 = Math.pow((1 + monthlyInterestRate), durationInMonth)- 1;
+		double MonthlyMortgage = MortgageCalculation1 / MortgageCalculation2;
 
-		System.out.printf("Monthly payment is : $%,.2f ",actualMonthlyMortgage);
+		System.out.printf("Monthly payment is : $%,.2f ", MonthlyMortgage);
 	
 		
 	}
