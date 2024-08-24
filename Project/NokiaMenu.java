@@ -6,7 +6,7 @@ public class NokiaMenu {
         private static int userChoice;
         private static Scanner keyboardInto = new Scanner(System.in);
 
-        public static void main(String... tijani){
+        public static void main(String... args){
 
             displayMainMenu();
 
@@ -52,6 +52,9 @@ public class NokiaMenu {
 			case 11 :   displayClockMenu();break;
 			case 12 :   System.out.print("Profile"); break;
 			case 13 :   System.out.printf("Sim services%n"); break;
+			default :   System.out.println("Invalid option!!. Try again"); 
+				     displayMainMenu(); break;
+
 
            	}    
     
@@ -96,6 +99,9 @@ public class NokiaMenu {
                         case 9 : System.out.print("Speed dials");  break;
                         case 10 : System.out.print("Voice tags"); break;
                         case 11 : displayMainMenu();
+			default :   System.out.println("Invalid option!!. Try again");
+				    displayPhoneBookMenu(); break;
+
 
 
                 }
@@ -118,9 +124,12 @@ public class NokiaMenu {
                 int optionMenu = keyboardInto.nextInt();
 
                  switch(optionMenu){
-                 	case 1 : System.out.print("Type of view"); break;
-                        case 2 : System.out.print("Memory Status"); break;
-                        case 3 : displayPhoneBookMenu();
+                 	case 1 :    System.out.print("Type of view"); break;
+                        case 2 :    System.out.print("Memory Status"); break;
+                        case 3 :    displayPhoneBookMenu();
+			default :   System.out.println("Invalid option!!. Try again");
+				    displayOptionsMenu(); break;
+
 		 }
   
 	}
@@ -165,6 +174,9 @@ public class NokiaMenu {
 			case 9 : System.out.print("Voice Mailbox Number");break;
 			case 10 : System.out.print("Service Command Editor");break;
 			case 0 : displayMainMenu(); break;
+			default :   System.out.println("Invalid option!!. Try again");
+				    displayMessageMenu(); break;
+
 		}
 
 	}	
@@ -189,7 +201,10 @@ public class NokiaMenu {
 
 			case 1 : displaySet1Menu();break;
 			case 2 : displayCommonMenu();break;
-			case 3 : displayMessageMenu();break;		
+			case 3 : displayMessageMenu();break;
+			default :   System.out.println("Invalid option!!. Try again");
+				   displayMessageSetting(); break;
+		
 		}	
 	
 	}
@@ -217,6 +232,9 @@ public class NokiaMenu {
 			case 2 : System.out.print("Message Sent As");break;
 			case 3 : System.out.print("Message Validity");break;
 			case 4 : displayMessageSetting(); break; 	
+			default :   System.out.println("Invalid option!!. Try again");
+				    displaySet1Menu(); break;
+
 		}	
 
 	
@@ -245,6 +263,9 @@ public class NokiaMenu {
 			case 2 : System.out.print("Reply via same centre");break;
 			case 3 : System.out.print("Character support");break;
 			case 4 : displayMessageSetting(); break; 
+			default :   System.out.println("Invalid option!!. Try again");
+				    displayCommonMenu(); break;
+
 
 		}		
 	}
@@ -284,6 +305,9 @@ public class NokiaMenu {
 			case 7 : displayCallCostSettingMenu();break;
 			case 8 : System.out.print("Prepaid credit");break;
 			case 0 : displayMainMenu(); break;
+			default :   System.out.println("Invalid option!!. Try again");
+				    displayCallRegisterMenu(); break;
+
 		
 		}
 
@@ -312,6 +336,9 @@ public class NokiaMenu {
 			case 2 : System.out.print("All Call Cost");break;
 			case 3 : System.out.print("Clear Counter");
 			case 4 : displayCallRegisterMenu();break;
+			default :   System.out.println("Invalid option!!. Try again");
+				    displayShowCallCostMenu(); break;
+
 	
 		} 
 	}
@@ -337,6 +364,9 @@ public class NokiaMenu {
 			case 1 : System.out.print("Call Cost Limit");break;
 			case 2 : System.out.print("Show Cost in");break;
 			case 3 : displayCallRegisterMenu();break;
+			default :   System.out.println("Invalid option!!. Try again");
+				    displayCallCostSettingMenu(); break;
+
 		} 
 
 	}
@@ -378,6 +408,9 @@ public class NokiaMenu {
 			case 8 : System.out.print("Vibrating alert");break;
 			case 9 : System.out.print("Screen saver");break;
 			case 0 : displayMainMenu(); break;
+			default :   System.out.println("Invalid option!!. Try again");
+				    displayTonesMenu(); break;
+
 
 
 
@@ -413,6 +446,9 @@ public class NokiaMenu {
 			case 3 : displaySecuritySettingMenu();
 			case 4 : System.out.printf("Restore factory settings %n"); break;
 			case 0 : displayMainMenu(); break;
+			default :   System.out.println("Invalid option!!. Try again");
+				    displaySettingMenu(); break;
+
 		}
 
 	}
@@ -447,6 +483,9 @@ public class NokiaMenu {
 			case 5 : System.out.print("Phone line in use ");break;
 			case 6 : System.out.print("Automatic answer");break;
 			case 7 : displaySettingMenu();  break;
+			default :   System.out.println("Invalid option!!. Try again");
+				    displayCallSettingMenu(); break;
+
 
 		}  
 	
@@ -481,6 +520,9 @@ public class NokiaMenu {
 			case 5 : System.out.printf("Lights%n"); break;
 			case 6 : System.out.printf("Confirm sim service actions%n"); break;
 			case 7 : displaySettingMenu();break;
+			default :   System.out.println("Invalid option!!. Try again");
+				    displayPhoneSettingMenu(); break;
+
 		}
 	}
 
@@ -488,7 +530,7 @@ public class NokiaMenu {
 
 		System.out.print("""
 
-				Security Settings
+				Security S ettings
 			..................................
 				1 --> Pin code request
 				2 --> Call barring service
@@ -514,6 +556,9 @@ public class NokiaMenu {
 			case 5 : System.out.print("Phone security");break;
 			case 6 : System.out.print("Change access codes");break;
 			case 7 : displaySettingMenu(); break;
+			default :   System.out.println("Invalid option!!. Try again");
+				   displaySecuritySettingMenu(); break;
+
 
 		} 
 
@@ -548,6 +593,9 @@ public class NokiaMenu {
 			case 5 : System.out.print("Countdown timer");break;	
 			case 6 : System.out.print("Auto update of date and time");break;
 			case 0 : displayMainMenu();  break;
+			default :   System.out.println("Invalid option!!. Try again");
+				    displayClockMenu(); break;
+
 		
 		}
 
