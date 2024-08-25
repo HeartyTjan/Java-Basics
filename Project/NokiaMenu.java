@@ -3,8 +3,8 @@ import java.util.Scanner;
 
 public class NokiaMenu {
 
-        private static int userChoice;
-        private static Scanner keyboardInto = new Scanner(System.in);
+        public static int userChoice;
+        public static Scanner keyboardInto = new Scanner(System.in);
 
         public static void main(String... args){
 
