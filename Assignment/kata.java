@@ -5,15 +5,8 @@ public class Kata{
 	public static int userInput;
 
 	public static void main (String... args){
-
-		
 	
-		displayCalculationMenu();
-		
-		//calculateEvenNumber(userInput);
-		//calculatePrimeNumber(userInput);
-			
-
+		displayCalculationMenu();				
 	}
 
 	public static void displayCalculationMenu(){
