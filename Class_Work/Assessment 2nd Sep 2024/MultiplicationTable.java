@@ -9,7 +9,7 @@ public class MultiplicationTable{
 						"""
 		);
 		
-		int lineCounter = 0;
+
 		for(int count = 1; count < 10; count++){
 
 			
@@ -17,15 +17,11 @@ public class MultiplicationTable{
 
 				
 				
-				System.out.printf("%d * %d = %d  ", count,counter, count * counter);
+				System.out.printf("%d * %d = %d \t ", counter,count, count * counter);
 				
-				lineCounter++;
-				if (lineCounter == 9){
-					System.out.println();
-					lineCounter = 0;
-				}
+				
 			}
-			
+			System.out.println();
 		}
 		
 		
