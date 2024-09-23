@@ -1,30 +1,4 @@
 public class FunctionListWithArray{
-
-
-	public static void main(String... args){
-
-		int[] scores = {10,12,14};//{10,15,100,30,70,12,32,71,17,70};
-
-		int[] scores2 = {5,4,2};//{19,89,54,21,45,90,87};
-		
-		String[] names = {"Madam", "racecaR","float","baba"};
-		String[] names2 = {"ope","tope"};
-
-		//System.out.println("The largest is : " + getLargestArray(scores));
-
-		//getReverseArray(scores);
-		//System.out.printf("%nCan inputed number be found in the array : " + checkForElement(scores, 30));
-		//System.out.println();
-		//printElementofOddPosition(scores);
-		//printElementofEvenPosition(scores);
-		//System.out.printf("%nRunning Total is : %d", computeRunningTotal(scores));
-		//testStringIsPalindrome(names);
-
-		//System.out.print(getSumUsingDoWhileLoop(scores));
-		//concatenateIntArray(scores,scores2);
-		//concatenateStringArray(names, names2);
-		concatenateArrayalternatively(scores,scores2);
-	}
 	
 	public static int getLargestArray(int[] array){
 
@@ -226,22 +200,5 @@ public class FunctionListWithArray{
 				
 		}                                    
 		
-		/*
-		for(int counter =uCounter * 2 + 1 ; counter <= count+1; counter++){
-				
-				int b = 0;
-			
-				concat[counter] = array2[b];
-				b++;
-				System.out.print(concat[counter]);
-				if(counter < concat.length -1) System.out.print(", ");
-			
-				System.out.print("counter" + counter);
-				
-		}
-		*/
-		
-		
-
 	}
 }
