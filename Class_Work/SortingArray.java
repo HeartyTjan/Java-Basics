@@ -3,13 +3,13 @@ public class SortingArray{
 
 	public static void main(String... args){
 
-		int [] arr = {5,9,1,6,18,7,2,87,20,37,12,45};
+		int [] numbers = {5,9,1,6,18,7,2,87,20,37,12,45};
 		
 		SortingArray array = new SortingArray();
 
-		 array.sorting(arr);
+		 array.sorting(numbers);
 		
-		System.out.print(Arrays.toString(arr));
+		System.out.print(Arrays.toString(numbers);
 
 	}
 
