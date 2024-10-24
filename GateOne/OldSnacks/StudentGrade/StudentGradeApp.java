@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+import java.util.Arrays;
 public class StudentGradeApp{
 
 	static Scanner receiver = new Scanner(System.in);
@@ -10,11 +10,9 @@ public class StudentGradeApp{
 		
 		int[] totalOfEachStudent = getTotalForEachStudent(studentGrades);
 
-		int[] sortedTotal = sortTotal(totalOfEachStudent);
-
 		double [] averageofEachStudent =  getAverageforEachStudent(totalOfEachStudent,studentGrades);
 		
-		System.out.printf("%n=========================================================================");
+		displayDash();
 
 		System.out.printf("%nSTUDENT%8s", " ");
 		for(int count = 0; count < numberOfSubject; count++){
@@ -23,9 +21,11 @@ public class StudentGradeApp{
 		}
 
 		System.out.printf("%s\t%s\t%s", "TOT","AVG","POS");
-		System.out.printf("%n=========================================================================");
+		displayDash();
 
-		int pos = 0;
+		int [] position = getStudentPositionFromTotal(totalOfEachStudent);
+
+		
 		for(int student = 0; student <studentGrades.length; student++){
 
 			System.out.printf("%nStudent %d", student+1);
@@ -36,31 +36,21 @@ public class StudentGradeApp{
 				System.out.printf("%9d", studentGrades[student][subjects]);
 
 			}
-
+			
 			System.out.printf("%7d",totalOfEachStudent[student]);
 			System.out.printf("%9.2f",averageofEachStudent[student]);
-				
-			//int pos = 0;
-			for(int count = 1; count < totalOfEachStudent.length; count++){
-
-				if(totalOfEachStudent[student] > totalOfEachStudent[count]) {
-					
-					pos = student + 1; 	
-				}
-			}
-			System.out.printf("%10d", pos);
+			System.out.printf("%10d", position[student]);
 			System.out.println(" ");
-			
 			
 		}
 
-		System.out.printf("%n=========================================================================");
-		System.out.printf("%n=========================================================================");
+		displayDash();
+		displayDash();
 
 
 		System.out.printf("%nSUBJECT SUMMARY%n");
 		
-		int[] highestAndLowest = new int [2];
+		int[] highestAndLowest = new int [2]; 
 		int[][] passAndFail = new int[numberOfSubject][2];
 		for (int subject = 0 ; subject < studentGrades[0].length; subject++){
 
@@ -77,7 +67,7 @@ public class StudentGradeApp{
 				totalPerSubject += studentGrades[count][subject];
 				
 				if (studentGrades[count][subject] > 50 && studentGrades[count][subject] <= 100) pass++;
-				else if (studentGrades[count][subject] < 50 && studentGrades[count][subject] >=0 ) fail++; 
+				else if (studentGrades[count][subject] <  50 && studentGrades[count][subject] >=0 ) fail++; 
 
 				if (studentGrades[count][subject] > largest) largest = studentGrades[count][subject];
 				if (studentGrades[count][subject] < smallest)smallest = studentGrades[count][subject];
@@ -99,8 +89,8 @@ public class StudentGradeApp{
 			
 		}
 
-		System.out.printf("%n=========================================================================");
-		System.out.printf("%n=========================================================================");
+		displayDash();
+		displayDash();
 
 		int highestFail =  passAndFail[0][1];
 		int highestPass = passAndFail[0][0];
@@ -108,15 +98,18 @@ public class StudentGradeApp{
 		for(int subject = 0; subject <passAndFail[0].length; subject++){
 
 
-			if(passAndFail[subject][0] > highestPass) highestPass = passAndFail[subject][0];
+			if(passAndFail[subject][0] != 0 && passAndFail[subject][0] > highestPass) highestPass = passAndFail[subject][0];
 
-			if(passAndFail[subject][1] > highestFail) highestFail = passAndFail[subject][1];
+			if(passAndFail[subject][1] != 0 && passAndFail[subject][1] > highestFail) highestFail = passAndFail[subject][1];
 
 		}
 		for (int count  = 0; count < passAndFail[0].length; count++){
 
-		    if(passAndFail[count][1] == highestFail)System.out.printf("%nThe hardest Subject is Subject %d with %d failures", count+1, passAndFail[count][1]);
-		    if(passAndFail[count][0] == highestPass)System.out.printf("%nThe easiest Subject is Subject %d with %d passes", count+1, passAndFail[count][0]);
+		    if(passAndFail[count][1] != 0 && passAndFail[count][1] == highestFail)
+				System.out.printf("%nThe hardest Subject is Subject %d with %d failures", count+1, passAndFail[count][1]);
+
+		    if(passAndFail[count][0] != 0 && passAndFail[count][0] == highestPass)
+				System.out.printf("%nThe easiest Subject is Subject %d with %d passes", count+1, passAndFail[count][0]);
 
 		}
 		  
@@ -125,7 +118,6 @@ public class StudentGradeApp{
 		int lowest = studentGrades[0][0];
 		
 		for(int student = 0; student < studentGrades.length; student++){
-
 
 
 			for(int subject = 0; subject < studentGrades[0].length; subject++){
@@ -158,11 +150,14 @@ public class StudentGradeApp{
 			}
 						
 		}
-		System.out.printf("%n=========================================================================");
+
+		displayDash();
 
 			System.out.printf("%nCLASS SUMMARY%n");
 		
-		System.out.printf("%n=========================================================================%n");
+		displayDash();
+
+			int[] sortedTotal = sortTotal(totalOfEachStudent);
 			
 			for(int student = 0; student < studentGrades.length; student++){
 
@@ -179,7 +174,7 @@ public class StudentGradeApp{
 				
 			}
 		 
-		System.out.printf("%n=========================================================================%n%n");
+		displayDash();
 	
 		System.out.printf("%n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!%n%n");
 
@@ -201,8 +196,9 @@ public class StudentGradeApp{
 		System.out.printf("%n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!%n%n");
 
 
-		System.out.printf("%n=========================================================================%n%n");
-
+		displayDash();
+	
+			
 			int classTotal = 0;
 			double average = 0;
 			for(int total : sortedTotal){
@@ -215,10 +211,39 @@ public class StudentGradeApp{
 
 			System.out.printf("Class Total is : %d%n", classTotal);
 			System.out.printf("%nClass Average is : %.2f%n", average);
-
-		System.out.printf("%n=========================================================================%n%n");
+			
+		displayDash();
 	}
 
+	public void displayDash(){
+
+		System.out.printf("%n=========================================================================%n%n");
+
+	}
+
+	public int [] getStudentPositionFromTotal(int [] totalOfEachStudent){
+
+		int [] studentPosition = new int[totalOfEachStudent.length];
+
+		for(int student = 0; student < totalOfEachStudent.length; student++){
+				
+			int pos = 0;
+			for(int count = 0; count < totalOfEachStudent.length; count++){
+
+				if(totalOfEachStudent[student] < totalOfEachStudent[count]) {
+					
+					pos++;	
+						
+				}	
+					 	
+			}
+
+			studentPosition[student] = pos + 1;
+
+		}										
+
+		return studentPosition;
+	}
 
 	public int[][] collectStudentScore(int numberOfStudent, int numberOfSubject){
 
@@ -314,6 +339,7 @@ public class StudentGradeApp{
 		}
   		return totals;
 	 }
+	
 }
 
 
