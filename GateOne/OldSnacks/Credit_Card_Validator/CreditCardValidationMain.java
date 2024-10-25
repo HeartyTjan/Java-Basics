@@ -1,8 +1,7 @@
 import java.util.Scanner;
-import java.util.InputMismatchException;
+
 public class CreditCardValidationMain{
 
-	
 	public static void main(String... args){
 
 		Scanner receiver = new Scanner(System.in);
