@@ -12,6 +12,8 @@ public class StudentGradeApp{
 
 		double [] averageofEachStudent =  getAverageforEachStudent(totalOfEachStudent,studentGrades);
 		
+		int [] position = getStudentPositionFromTotal(totalOfEachStudent);
+		
 		displayDash();
 
 		System.out.printf("%nSTUDENT%8s", " ");
@@ -22,9 +24,6 @@ public class StudentGradeApp{
 
 		System.out.printf("%s\t%s\t%s", "TOT","AVG","POS");
 		displayDash();
-
-		int [] position = getStudentPositionFromTotal(totalOfEachStudent);
-
 		
 		for(int student = 0; student <studentGrades.length; student++){
 
@@ -45,21 +44,98 @@ public class StudentGradeApp{
 		}
 
 		displayDash();
+		subjectSummary(studentGrades);
+		classSummary(totalOfEachStudent,studentGrades);
+	}
+
+	public void classSummary(int[] totalOfEachStudent,int[][] studentGrades){
+
 		displayDash();
+		System.out.printf("%nCLASS SUMMARY%n");
+		
+		displayDash();
+
+		int[] sortedTotal = sortTotal(totalOfEachStudent);
+			
+		for(int student = 0; student < studentGrades.length; student++){
+
+			int totalPerSubject = 0;
+
+			for(int subject = 0; subject < studentGrades[0].length; subject++){
+
+				totalPerSubject += studentGrades[student][subject];
+
+			}
+			
+			if(totalPerSubject == sortedTotal[0])
+					System.out.printf("%nBest Graduating Student is : Student %d Scoring %d%n", student+1, totalPerSubject);
+				
+				
+		}
+		 
+		displayDash();
+	
+		System.out.printf("%n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!%n%n");
+
+		for(int student = 0; student < studentGrades.length; student++){
+
+			int totalPerSubject = 0;
+
+			for(int subject = 0; subject < studentGrades[0].length; subject++){
+
+				totalPerSubject += studentGrades[student][subject];
+
+			}
+			
+			if(totalPerSubject == sortedTotal[studentGrades.length-1])
+					System.out.printf("%nWorst Graduating Student is : Student %d Scoring %d%n", student+1, totalPerSubject);
+			
+		}	
+				
+		System.out.printf("%n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!%n%n");
+
+
+		displayDash();
+	
+			
+		int classTotal = 0;
+		double average = 0;
+
+		for(int total : sortedTotal){
+
+			classTotal  += total;
+
+		}
+
+		average = (double)classTotal / studentGrades.length;
+
+		System.out.printf("Class Total is : %d%n", classTotal);
+		System.out.printf("%nClass Average is : %.2f%n", average);
+			
+		displayDash();
+	
+
+
+
+	}		
+
+	public void subjectSummary(int[][] studentGrades){
 
 
 		System.out.printf("%nSUBJECT SUMMARY%n");
 		
 		int[] highestAndLowest = new int [2]; 
-		int[][] passAndFail = new int[numberOfSubject][2];
+		int[][] passAndFail = new int[studentGrades[0].length][2];
+		int pass = 0;
+		int fail = 0;
 		for (int subject = 0 ; subject < studentGrades[0].length; subject++){
 
 			int largest = studentGrades[0][subject];
 			int smallest =  studentGrades[0][subject];
 			int totalPerSubject = 0;
 			double averagePerSubject = 0;
-			int pass = 0;
-			int fail = 0;
+			pass = 0;
+			fail = 0;
 			System.out.printf("%nSubject %d%n", subject+1);
 			
 			for(int count = 0 ; count < studentGrades.length; count++){
@@ -75,8 +151,6 @@ public class StudentGradeApp{
 
 			  passAndFail[subject][0] = pass;
 			  passAndFail[subject][1] = fail;
-			  
-			  
 
 			  averagePerSubject = (double)totalPerSubject / studentGrades.length;
 
@@ -95,7 +169,7 @@ public class StudentGradeApp{
 		int highestFail =  passAndFail[0][1];
 		int highestPass = passAndFail[0][0];
 
-		for(int subject = 0; subject <passAndFail[0].length; subject++){
+		for(int subject = 0; subject <passAndFail.length; subject++){
 
 
 			if(passAndFail[subject][0] != 0 && passAndFail[subject][0] > highestPass) highestPass = passAndFail[subject][0];
@@ -103,7 +177,7 @@ public class StudentGradeApp{
 			if(passAndFail[subject][1] != 0 && passAndFail[subject][1] > highestFail) highestFail = passAndFail[subject][1];
 
 		}
-		for (int count  = 0; count < passAndFail[0].length; count++){
+		for (int count  = 0; count < passAndFail.length; count++){
 
 		    if(passAndFail[count][1] != 0 && passAndFail[count][1] == highestFail)
 				System.out.printf("%nThe hardest Subject is Subject %d with %d failures", count+1, passAndFail[count][1]);
@@ -151,68 +225,6 @@ public class StudentGradeApp{
 						
 		}
 
-		displayDash();
-
-			System.out.printf("%nCLASS SUMMARY%n");
-		
-		displayDash();
-
-			int[] sortedTotal = sortTotal(totalOfEachStudent);
-			
-			for(int student = 0; student < studentGrades.length; student++){
-
-				int totalPerSubject = 0;
-
-				for(int subject = 0; subject < studentGrades[0].length; subject++){
-
-					totalPerSubject += studentGrades[student][subject];
-
-				}
-			
-				if(totalPerSubject == sortedTotal[0])System.out.printf("%nBest Graduating Student is : Student %d Scoring %d%n", student+1, totalPerSubject);
-				
-				
-			}
-		 
-		displayDash();
-	
-		System.out.printf("%n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!%n%n");
-
-			for(int student = 0; student < studentGrades.length; student++){
-
-				int totalPerSubject = 0;
-
-				for(int subject = 0; subject < studentGrades[0].length; subject++){
-
-					totalPerSubject += studentGrades[student][subject];
-
-				}
-			
-				if(totalPerSubject == sortedTotal[studentGrades.length-1])System.out.printf("%nWorst Graduating Student is : Student %d Scoring %d%n", 
-					student+1, totalPerSubject);
-			
-			}	
-				
-		System.out.printf("%n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!%n%n");
-
-
-		displayDash();
-	
-			
-			int classTotal = 0;
-			double average = 0;
-			for(int total : sortedTotal){
-
-				classTotal  += total;
-
-			}
-
-			average = (double)classTotal / studentGrades.length;
-
-			System.out.printf("Class Total is : %d%n", classTotal);
-			System.out.printf("%nClass Average is : %.2f%n", average);
-			
-		displayDash();
 	}
 
 	public void displayDash(){
