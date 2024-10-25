@@ -1,8 +1,5 @@
 public class CreditCardValidation{
 
-
-	
-
 	public void displayInfo(String number){
 
 		String creditCardNumber = number.replace(" ", "");
@@ -43,16 +40,12 @@ public class CreditCardValidation{
 	}
 	
 	public boolean checkCreditCardValidation(String creditCardNumber){
-
-		for (int count = 0; count < len(creditCardNumber); count++){
-
-			if float(creditCardNumber.charAt(count)) throw  new IllegalArgumentException("invalid  input");
-		
-		}
 	
 		int size = creditCardNumber.length();
 		int [] convertedCardNumber = new int [size];
 		int total = 0;
+
+		if (size < 13 || size > 16)return false;
 
 		for(int count = 0; count < size; count++){
 
