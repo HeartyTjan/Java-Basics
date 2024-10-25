@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.time.LocalDate;
+import java.util.InputMismatchException;
+import java.time.DateTimeException;
 
 public class MenstrualCycle{
  	
@@ -62,7 +64,11 @@ public class MenstrualCycle{
 								 LocalDate nextStartDate =  calculateMenstrualCycle(startDate,lengthOfCycle);
 							
 								 System.out.printf("Hello %s your next cycle start date is : %tF ", name, nextStartDate);break;
+
+							}catch(InputMismatchException e){
 								
+								System.out.print("Expected a digit. Please enter a number");break;
+
 							}catch(Exception e){
 								System.out.print("Enter date in the right format(yyyy-mm-dd)");break;
 							}
@@ -89,10 +95,15 @@ public class MenstrualCycle{
 								LocalDate ovulationPeriod = ovulationDay.plusDays(4);
 							
 								System.out.printf("Hello %s your Ovulation day is from : %tF to %tF ", name, ovulationDay, ovulationPeriod);break;
+
+							}catch(InputMismatchException e){
 								
+								System.out.print("Expected a digit. Please enter a number");break;
+
 							}catch(Exception e){
 								System.out.print("Enter date in the right format(yyyy-mm-dd)");break;
 							}
+
 					
 					case 3: System.out.print("""
 
@@ -114,11 +125,19 @@ public class MenstrualCycle{
 								 LocalDate safePeriod = safePeriodStartDate.plusDays(3);
 								
 								 System.out.printf("Hello %s your Safe period date is from : %tF to %tF%n%n", name, safePeriodStartDate, safePeriod);
+
 								 System.out.print("Having unprotected sex during this period reduces odds of pregnancy\nThe closer you get to having your next period the lower the chances of getting pregnant");break;
-						
+
+							}catch(InputMismatchException e){
+								
+								System.out.print("Expected a digit. Please enter a number");break;
+
 							}catch(Exception e){
 								System.out.print("Enter date in the right format(yyyy-mm-dd)");break;
 							}
+
+
+
 					case 4 : System.out.print("""
 
 							 Check your Fertile Window
@@ -139,12 +158,17 @@ public class MenstrualCycle{
 				
 								LocalDate fertileWindow = fertileStartDate.plusDays(4);
 						
-								System.out.printf("Hello %s your fertile window days starts from : %tF to %tF ", name, fertileStartDate, fertileWindow);break;
+								System.out.printf("Hello %s your fertile window days starts from : %tF to %tF "
+									, name, fertileStartDate, fertileWindow);break;
 									
+							}catch(InputMismatchException e){
 								
+								System.out.print("Expected a digit. Please enter a number");break;
+
 							}catch(Exception e){
-								System.out.print("Enter date in the right format(yyyy-mm-dd)");
+								System.out.print("Enter date in the right format(yyyy-mm-dd)");break;
 							}
+
 							
 						 
 					case 0 : break;
@@ -165,15 +189,25 @@ public class MenstrualCycle{
 	
 	public LocalDate calculateMenstrualCycle(String date,int lengthOfCycle){
 
-			if (date.isEmpty())throw  new IllegalArgumentException("Date cannot be empty");	
+		if (date.isEmpty())throw  new IllegalArgumentException("Date cannot be empty");	
 
-		
+		LocalDate nextCycleStartDate = LocalDate.now();		
+
+		try{
 			LocalDate startDate = LocalDate.parse(date);
 
-			LocalDate nextCycleStartDate = startDate.plusDays(lengthOfCycle);
+			nextCycleStartDate = startDate.plusDays(lengthOfCycle);
 
-			return nextCycleStartDate;
+			
+		}catch(DateTimeException e){
 
+			System.out.print("Date exceeds the supported date range");
+		
+		}
+
+		return nextCycleStartDate;
+		
+	
 	}
 
 	public LocalDate getOvulationDate(String date,int lengthOfCycle){
@@ -181,8 +215,8 @@ public class MenstrualCycle{
 		if (date.isEmpty())throw  new IllegalArgumentException("Date cannot be empty");	
 		
 		LocalDate startDate = LocalDate.parse(date);
-
-
+	
+	    try{
 		if (lengthOfCycle >= 21 && lengthOfCycle <= 24){
 
 			LocalDate startDatePlusCycle = startDate.plusDays(lengthOfCycle);
@@ -212,6 +246,12 @@ public class MenstrualCycle{
 			return ovulationDay;	
 
 		}
+ 	
+	   }catch(DateTimeException e){
+
+			System.out.print("Date exceeds the supported date range");
+
+		}
 
 		throw new IllegalArgumentException("if cycle is below 21 and above 35, please visit a doctor");
 		
@@ -221,10 +261,19 @@ public class MenstrualCycle{
 
 		if (date.isEmpty())throw  new IllegalArgumentException("Date cannot be empty");	
 		
-			
-		LocalDate ovulationDay = getOvulationDate(date,lengthOfCycle);
+		LocalDate safePeriod = LocalDate.now();
 
-		LocalDate safePeriod = ovulationDay.plusDays(3);
+		try{
+	
+			LocalDate ovulationDay = getOvulationDate(date,lengthOfCycle);
+
+			safePeriod = ovulationDay.plusDays(3);
+
+		}catch(DateTimeException e){
+
+			System.out.print("Date exceeds the supported date range");
+
+		}
 
 		return safePeriod;
 
@@ -233,11 +282,21 @@ public class MenstrualCycle{
 	
 	public LocalDate calculateFertileDate(String date, int lengthOfCycle){
 
-		if (date.isEmpty())throw  new IllegalArgumentException("Date cannot be empty");		
+		if (date.isEmpty())throw  new IllegalArgumentException("Date cannot be empty");	
+		
+		LocalDate fertileStartDate = LocalDate.now();
+		
+		try{	
 	
-		LocalDate ovulationDay = getOvulationDate(date,lengthOfCycle);
+			LocalDate ovulationDay = getOvulationDate(date,lengthOfCycle);
 
-		LocalDate fertileStartDate = ovulationDay.minusDays(5);
+			fertileStartDate = ovulationDay.minusDays(5);
+
+		}catch(DateTimeException e){
+
+			System.out.print("Date exceeds the supported date range");
+
+		}
 
 		return fertileStartDate;
 
