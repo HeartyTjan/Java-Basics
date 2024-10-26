@@ -38,6 +38,7 @@ public class BankeBank{
 			6 --> Pin Modification
 			7 --> Close account
 			8 --> display
+
 		       ==================================
 		""");
 		
@@ -59,10 +60,30 @@ public class BankeBank{
 				
 				case 5: transfer() ;break;
 
-				//case 6: findContactByPhoneNumber();break;
-				
-				case 7 :  Account.displayAccountListInfo(accounts);
-					  System.out.printf("%nEnter 1 for mainMenu or 0 to quit :");
+				case 6: System.out.print("""
+
+						Pin Modification Menu
+					    ===========================
+
+					     1 --> Change pin
+					     2 --> Check pin
+
+					    ============================
+					""");
+					System.out.printf("%nEnter preferred option: ");
+					int pinOption = receiver.nextInt();
+
+					switch (pinOption){
+
+					      case 1 : changeUserPin();break;
+						
+					      case 2 : checkPin();break;
+					   }break;					
+
+			   	case 7 :  closeAccount();break;			
+				case 8 :  Account.displayAccountListInfo(accounts);
+
+					  System.out.printf("%n%nEnter 1 for mainMenu or 0 to quit :");
 					  choice = receiver.nextInt();break;
 
 				default : System.out.print("Enter a valid option");break;
@@ -70,6 +91,7 @@ public class BankeBank{
 			
 			}
 		}
+
 	     }catch(InputMismatchException e){
 			
 			System.out.printf("%nInteger Value Expected");
@@ -155,10 +177,15 @@ public class BankeBank{
 
 					displaySavePrompt();
 
-				}else System.out.print("Incorrect account or pin");		
-		
-			   }else System.out.print("Incorrect account or pin");
+				}else {
 
+					 System.out.print("Incorrect pin");		
+				 }
+
+			   }else {
+
+					 System.out.print("Incorrect account details");
+				 }
 		       }		
 			    System.out.printf("%n%nEnter 1 for mainMenu or 0 to quit :");
 		            choice = receiver.nextInt();
@@ -207,10 +234,15 @@ public class BankeBank{
 
 					displaySavePrompt();
 
-				}else System.out.print("Incorrect account or pin");		
-		
-			   }else System.out.print("Incorrect account or pin");
+				}else {
 
+					  System.out.print("Incorrect pin");		
+				 }
+
+			   }else {
+
+				    System.out.print("Incorrect account details");
+			     }
 		       }		
 			    System.out.printf("%n%nEnter 1 for mainMenu or 0 to quit :");
 		            choice = receiver.nextInt();
@@ -258,10 +290,15 @@ public class BankeBank{
 
 					System.out.printf("Your balance is : %,.2f", account.getBalance());
 					
-				}else System.out.print("Incorrect account or pin");		
-		
-			   }else System.out.print("Incorrect account or pin");
+				}else {
 
+					  System.out.print("Incorrect pin");		
+				 }
+
+			   }else {
+
+				    System.out.print("Incorrect account details");
+			     }
 		       }		
 			    System.out.printf("%n%nEnter 1 for mainMenu or 0 to quit :");
 		            choice = receiver.nextInt();
@@ -290,7 +327,7 @@ public class BankeBank{
 		
 	        try{
 		
-		     if(accounts.size() > 2){
+		     if(accounts.size() >= 2){
 
 		           System.out.print("Enter account number : ");
 		           String accountNumber = receiver.next();
@@ -298,6 +335,8 @@ public class BankeBank{
 		           System.out.print("Enter your pin :");
 		           String pin = receiver.next();
 	
+			   String recipientAccount = "";
+			   double amount = 0;
 		           for(Account account : accounts){
 
 			        if(account.getAccountNumber().equals(accountNumber)){
@@ -308,30 +347,29 @@ public class BankeBank{
 					  System.out.printf("%n===================================%n");
 
 					  System.out.print("Enter recipient account: ");
-					  String recipientAccount = receiver.next();
+					  recipientAccount = receiver.next();
 
 					  System.out.print("Enter amount to transfer: ");
-					  double amount = receiver.nextDouble();
+					  amount = receiver.nextDouble();
 
 					  account.withdraw(amount);
 
-					  if(account.getAccountNumber().equals(recipientAccount)){
+				      }else System.out.print("Incorrect pin");
 
-						account.deposit(amount);
-					  }
-				     
-				  
-					    displaySavePrompt();
+				 }else System.out.print("Incorrect account details");
+				      
+				 if(account.getAccountNumber().equals(recipientAccount)){
 
-				      }else System.out.print("Incorrect account or pin");		
-		
-			        }else System.out.print("Incorrect account or pin");
-
-		            }		
-			    System.out.printf("%n%nEnter 1 for mainMenu or 0 to quit :");
-		            choice = receiver.nextInt();
-
+					account.deposit(amount);
+				
+					  displaySavePrompt();
+				 }
+		         }		
+			    
 			}else System.out.print("Cannot make Transfer");
+
+			  System.out.printf("%n%nEnter 1 for mainMenu or 0 to quit :");
+		            choice = receiver.nextInt();
 
 	          }catch(InputMismatchException e){
 			
@@ -370,16 +408,16 @@ public class BankeBank{
 					System.out.printf("%n%n%10s %s", "Welcome", account.getAccountName());
 					System.out.printf("%n===================================%n");
 
-					System.out.print("Enter a new four digit pin");
+					System.out.print("Enter a new four digit pin: ");
 					String newPin = receiver.next();
 
 					account.changePin(newPin); 
 					
 					displaySavePrompt();
 
-				}else System.out.print("Incorrect account or pin");		
+				}else System.out.print("Incorrect pin");		
 		
-			   }else System.out.print("Incorrect account or pin");
+			   }else System.out.print("Incorrect account details");
 
 		       }		
 			    System.out.printf("%n%nEnter 1 for mainMenu or 0 to quit :");
@@ -410,23 +448,23 @@ public class BankeBank{
 		       System.out.print("Enter account number : ");
 		       String accountNumber = receiver.next();
 
-		       System.out.print("Enter your pin :");
-		       String pin = receiver.next();
+		       System.out.print("Enter your last Name :");
+		       String lastName = receiver.next();
 	
 		       for(Account account : accounts){
 
 			   if(account.getAccountNumber().equals(accountNumber)){
 
-				if(account.getPin().equals(pin)){
+				if(account.getLastName().equals(lastName)){
 
 					System.out.printf("%n%n%10s %s", "Welcome", account.getAccountName());
 					System.out.printf("%n===================================%n");
 
 					System.out.printf("Your new Pin is : %s", account.getPin());
 
-				}else System.out.print("Incorrect account or pin");		
+				}else System.out.print("Incorrect name");		
 		
-			   }else System.out.print("Incorrect account or pin");
+			   }else System.out.print("Incorrect account details");
 
 		       }		
 			    System.out.printf("%n%nEnter 1 for mainMenu or 0 to quit :");
@@ -444,10 +482,44 @@ public class BankeBank{
 	}
 
 
+	
+	public void closeAccount(){
+
+		System.out.print("""
+
+			     Account Closure 
+			  ======================
+		      """);
+		
+
+		try{
+			 System.out.print("Enter account number : ");
+		 	 String accountNumber = receiver.next();
+		 	
+		 	 for(Account account : accounts){
+				
+				if(account.getAccountNumber().equals(accountNumber)){
+
+					account.closeAccount();
+					displaySavePrompt();
+				}
+				
+			 }
+
+			  System.out.printf("%n%nEnter 1 for mainMenu or 0 to quit :");
+		          choice = receiver.nextInt();
+
+		 }catch(InputMismatchException e){
+			
+			System.out.print("Integer Value Expected");
+			
+		}catch(ArrayIndexOutOfBoundsException e){
+			
+			System.out.print("Out of Bound");
+		}	
+	}
 
 	
-
-
 
 	public void displaySavePrompt(){
 		

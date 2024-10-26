@@ -14,6 +14,8 @@ public class Account{
 
 	private String pin;
 
+	private boolean accountStatus;
+
 	public Account(String firstName,String lastName,String accountNumber,String pin){
 
 		this.firstName = firstName;
@@ -23,6 +25,8 @@ public class Account{
 		this.accountNumber = accountNumber;
  
 		this.pin = pin;
+		
+		accountStatus = true;
 	}
 
 
@@ -53,22 +57,14 @@ public class Account{
 		
 	}
 
-	/*
-	public void transfer(double amount, String recipient){
-
-		if(this.balance >= amount){
-		
-			this.balance -= amount;
-			recipient.balance += amount;
-
-		}else System.out.print("Insufficient Funds");
-		
-	
-	}
-	*/
 	public String getAccountName(){
 
 	     return lastName + " " + firstName;
+	}
+
+	public String getLastName(){
+
+	     return lastName;
 	}
 
 	public double getBalance(){
@@ -87,14 +83,40 @@ public class Account{
 
 	}
 
+	public boolean checkAccountStatus(){
+
+		return accountStatus;
+	}
+
+	public boolean closeAccount(){
+
+		if(this.balance <= 0 && this.accountStatus == true){
+
+			accountStatus = false;
+		}
+
+		return accountStatus;
+
+	}
+
+
+
 	public void displayAccountInfo(){
 
+		String status = "";
+		if(accountStatus){
+
+		    status = "Open";
+
+		}else status = "Closed";
+
 		String fullName = lastName + " " + firstName;
-		System.out.printf("%n%-23s%20s",fullName, accountNumber);
+		System.out.printf("%n%-23s%12s%11s",fullName, accountNumber, status);
 	}
 
 	public static void displayAccountListInfo(ArrayList<Account> accounts){
-		System.out.printf("%s\t\t\t%s", "Account Name","Account Number");
+
+		System.out.printf("%s\t\t%s\t%s", "Account Name","Account Number", "Status");
 		for(Account account : accounts){
 			
 			account.displayAccountInfo();
