@@ -53,6 +53,7 @@ public class Account{
 		
 	}
 
+	/*
 	public void transfer(double amount, String recipient){
 
 		if(this.balance >= amount){
@@ -64,7 +65,7 @@ public class Account{
 		
 	
 	}
-
+	*/
 	public String getAccountName(){
 
 	     return lastName + " " + firstName;
@@ -80,11 +81,10 @@ public class Account{
 		return pin;
 	}
 
-	public String changePin(String newPin){
+	public void changePin(String newPin){
 
 		this.pin = newPin;
 
-		return pin;
 	}
 
 	public void displayAccountInfo(){

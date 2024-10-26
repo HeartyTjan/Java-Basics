@@ -35,7 +35,7 @@ public class BankeBank{
 			3 --> Withdraw Money
 			4 --> Check account balance
 			5 --> Transfer 
-			6 --> Change pin
+			6 --> Pin Modification
 			7 --> Close account
 			8 --> display
 		       ==================================
@@ -57,7 +57,7 @@ public class BankeBank{
 			
 				case 4 : checkBalance();break;
 				
-				//case 5: findContactByLastName();break;
+				case 5: transfer() ;break;
 
 				//case 6: findContactByPhoneNumber();break;
 				
@@ -315,7 +315,7 @@ public class BankeBank{
 
 					  account.withdraw(amount);
 
-					  if(account.getAccountNumber().equals(recipeintAccount)){
+					  if(account.getAccountNumber().equals(recipientAccount)){
 
 						account.deposit(amount);
 					  }
@@ -340,11 +340,112 @@ public class BankeBank{
 		  }catch(ArrayIndexOutOfBoundsException e){
 			
 			System.out.print("Out of Bound");
-		  }
-
-	
+		  }	
 
 	}
+
+	public void changeUserPin(){
+	
+              System.out.print("""
+
+			    Pin Modification 
+			    Change Pin Login
+			 ======================
+		      """);
+
+		try{
+
+		       System.out.print("Enter account number : ");
+		       String accountNumber = receiver.next();
+
+		       System.out.print("Enter your pin :");
+		       String pin = receiver.next();
+	
+		       for(Account account : accounts){
+
+			   if(account.getAccountNumber().equals(accountNumber)){
+
+				if(account.getPin().equals(pin)){
+
+					System.out.printf("%n%n%10s %s", "Welcome", account.getAccountName());
+					System.out.printf("%n===================================%n");
+
+					System.out.print("Enter a new four digit pin");
+					String newPin = receiver.next();
+
+					account.changePin(newPin); 
+					
+					displaySavePrompt();
+
+				}else System.out.print("Incorrect account or pin");		
+		
+			   }else System.out.print("Incorrect account or pin");
+
+		       }		
+			    System.out.printf("%n%nEnter 1 for mainMenu or 0 to quit :");
+		            choice = receiver.nextInt();
+			
+	        }catch(InputMismatchException e){
+			
+			System.out.print("Integer Value Expected");
+			
+		}catch(ArrayIndexOutOfBoundsException e){
+			
+			System.out.print("Out of Bound");
+		}	
+
+	}
+
+	public void  checkPin(){
+
+		 System.out.print("""
+
+			    Pin modification 
+			    Check Pin Login
+			  ======================
+		      """);
+
+		try{
+
+		       System.out.print("Enter account number : ");
+		       String accountNumber = receiver.next();
+
+		       System.out.print("Enter your pin :");
+		       String pin = receiver.next();
+	
+		       for(Account account : accounts){
+
+			   if(account.getAccountNumber().equals(accountNumber)){
+
+				if(account.getPin().equals(pin)){
+
+					System.out.printf("%n%n%10s %s", "Welcome", account.getAccountName());
+					System.out.printf("%n===================================%n");
+
+					System.out.printf("Your new Pin is : %s", account.getPin());
+
+				}else System.out.print("Incorrect account or pin");		
+		
+			   }else System.out.print("Incorrect account or pin");
+
+		       }		
+			    System.out.printf("%n%nEnter 1 for mainMenu or 0 to quit :");
+		            choice = receiver.nextInt();
+			
+	        }catch(InputMismatchException e){
+			
+			System.out.print("Integer Value Expected");
+			
+		}catch(ArrayIndexOutOfBoundsException e){
+			
+			System.out.print("Out of Bound");
+		}	
+
+	}
+
+
+
+	
 
 
 
