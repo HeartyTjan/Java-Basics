@@ -244,7 +244,7 @@ public class PhoneBookMain{
 			
 		}catch(ArrayIndexOutOfBoundsException e){
 			
-			Syst1em.out.print("Out of Bound");
+			System.out.print("Out of Bound");
 		}
 
 	}
