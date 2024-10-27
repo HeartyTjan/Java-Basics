@@ -153,6 +153,7 @@ public class BankeBank{
 			======================
 		  """);
 		
+		boolean status;
 	        try{
 		
 		      System.out.print("Enter account number : ");
@@ -175,8 +176,9 @@ public class BankeBank{
 
 					account.deposit(amount);
 
-					displaySavePrompt();
-
+					if (account.checkAccountStatus()){
+						displaySavePrompt();
+					}
 				}else {
 
 					 System.out.print("Incorrect pin");		
@@ -232,7 +234,10 @@ public class BankeBank{
 
 					account.withdraw(amount);
 
-					displaySavePrompt();
+					if (account.checkAccountStatus()){
+						displaySavePrompt();
+					}
+
 
 				}else {
 
@@ -339,32 +344,42 @@ public class BankeBank{
 			   double amount = 0;
 		           for(Account account : accounts){
 
-			        if(account.getAccountNumber().equals(accountNumber)){
+			       if (account.checkAccountStatus()){
+						
+			         	 if(account.getAccountNumber().equals(accountNumber)){
 
-				     if(account.getPin().equals(pin)){
+				    		 if(account.getPin().equals(pin)){
 
-					  System.out.printf("%n%n%10s %s", "Welcome", account.getAccountName());
-					  System.out.printf("%n===================================%n");
+						 	 System.out.printf("%n%n%10s %s", "Welcome", account.getAccountName());
+						 	 System.out.printf("%n===================================%n");
 
-					  System.out.print("Enter recipient account: ");
-					  recipientAccount = receiver.next();
+					 		 System.out.print("Enter recipient account: ");
+					 		 recipientAccount = receiver.next();
 
-					  System.out.print("Enter amount to transfer: ");
-					  amount = receiver.nextDouble();
+					 		 System.out.print("Enter amount to transfer: ");
+					 		 amount = receiver.nextDouble();
 
-					  account.withdraw(amount);
+					  		  account.withdraw(amount);
 
-				      }else System.out.print("Incorrect pin");
+				      		   }else {
+							    System.out.print("Incorrect pin");
+						     }
+					  }else {
+					             System.out.print("Incorrect account details");
+				      	    }
 
-				 }else System.out.print("Incorrect account details");
-				      
-				 if(account.getAccountNumber().equals(recipientAccount)){
+					 if(account.getAccountNumber().equals(recipientAccount)){
 
-					account.deposit(amount);
+						account.deposit(amount);
 				
-					  displaySavePrompt();
+					 	 displaySavePrompt();
+					 }
+		        
+				}else {
+
+					System.out.printf("%n%s%n", "Account is closed");
 				 }
-		         }		
+			   }		
 			    
 			}else System.out.print("Cannot make Transfer");
 

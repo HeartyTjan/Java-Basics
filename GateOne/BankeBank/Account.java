@@ -37,24 +37,28 @@ public class Account{
 
 	public void deposit(double depositAmount){
 
-		if(depositAmount > 0.0){
+		if(accountStatus){
 
-			this.balance += depositAmount;
+			if(depositAmount > 0.0){
 
-		}else System.out.print("Enter a valid amount");
+				this.balance += depositAmount;
 
-		
+			}else System.out.print("Enter a valid amount");
+
+		}else System.out.print("Account is closed");
 	}
 
 	public void withdraw(double withdrawAmount ){
 
-		if(withdrawAmount <= balance){
+		if(accountStatus){
 
-			balance -= withdrawAmount;
+			if(withdrawAmount <= balance){
 
-		}else System.out.print("Insufficient Funds");
+				balance -= withdrawAmount;
 
-		
+			}else System.out.print("Insufficient Funds");
+
+		}else System.out.print("Account is closed");
 	}
 
 	public String getAccountName(){
@@ -93,7 +97,7 @@ public class Account{
 		if(this.balance <= 0 && this.accountStatus == true){
 
 			accountStatus = false;
-		}
+		}else System.out.print("Ensure account balance is empty");
 
 		return accountStatus;
 
